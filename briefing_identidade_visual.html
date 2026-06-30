@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Briefing de Identidade Visual — Falcons Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --pk:#e91e8c;--pk2:#ff4db8;--pk3:#ff80cc;
+  --pu:#7c3aed;--pu2:#a855f7;--pu3:#d8b4fe;
+  --dark:#1a0a2e;--gray:#7c7488;--line:rgba(124,58,237,.14);
+  --grad:linear-gradient(135deg,#e91e8c,#a855f7);
+  --bg-soft:linear-gradient(135deg,#fdeef7 0%,#f6ecff 45%,#fdf2f6 100%);
+}
+body{font-family:'Poppins',sans-serif;background:var(--bg-soft);color:var(--dark);min-height:100vh;overflow-x:hidden}
+a{color:inherit}
+
+/* ===== Decorative blobs ===== */
+.blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.35;z-index:0;pointer-events:none}
+.blob1{width:420px;height:420px;background:var(--pk3);top:-140px;right:-140px}
+.blob2{width:380px;height:380px;background:var(--pu3);bottom:-160px;left:-140px}
+
+/* ===== Shell ===== */
+.shell{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+
+/* ===== Top brand ===== */
+.brand{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:2rem;text-align:center}
+.brand-mark{font-weight:900;font-size:1.05rem;letter-spacing:-.01em}
+.brand-mark span{font-family:'Shadows Into Light',cursive;font-size:1.6em;color:var(--pu);margin-left:.05em}
+
+/* ===== Progress ===== */
+.progress-wrap{margin-bottom:2.2rem}
+.progress-track{height:6px;border-radius:99px;background:rgba(124,58,237,.12);overflow:hidden}
+.progress-fill{height:100%;border-radius:99px;background:var(--grad);width:20%;transition:width .45s cubic-bezier(.65,0,.35,1)}
+.steps-row{display:flex;justify-content:space-between;margin-top:.7rem}
+.step-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1}
+.step-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;background:#fff;border:2px solid rgba(124,58,237,.18);color:var(--gray);transition:all .3s}
+.step-circle.active{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(233,30,140,.35)}
+.step-circle.done{background:var(--pu);border-color:transparent;color:#fff}
+.step-label{font-size:.62rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.03em;text-align:center;display:none}
+@media(min-width:640px){.step-label{display:block}}
+.step-label.active{color:var(--pk)}
+
+/* ===== Card ===== */
+.card{background:#fff;border-radius:28px;padding:2.4rem 2rem;box-shadow:0 24px 60px -20px rgba(124,58,237,.22);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad)}
+.step-eyebrow{font-size:.7rem;font-weight:700;color:var(--pk);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.step-title{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.4rem}
+.step-desc{font-size:.88rem;color:var(--gray);margin-bottom:1.8rem;line-height:1.5}
+
+/* ===== Form fields ===== */
+.field{margin-bottom:1.3rem}
+.field label{display:block;font-size:.78rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}
+.field label .opt{color:var(--gray);font-weight:500;font-size:.72rem;margin-left:.3rem}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=url],.field textarea,.field select{
+  width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.75rem .9rem;font-family:inherit;font-size:.9rem;color:var(--dark);background:#fdfaff;transition:all .2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--pk);background:#fff;box-shadow:0 0 0 3px rgba(233,30,140,.1)}
+.field textarea{resize:vertical;min-height:90px;line-height:1.5}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+
+/* ===== Chips / pills (multi select) ===== */
+.chip-grid{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{padding:.55rem 1.05rem;border-radius:999px;border:1.5px solid var(--line);font-size:.8rem;font-weight:600;color:var(--dark);background:#fdfaff;cursor:pointer;transition:all .18s;user-select:none}
+.chip:hover{border-color:var(--pu3)}
+.chip.sel{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(233,30,140,.28)}
+
+/* ===== Color swatches ===== */
+.swatch-grid{display:flex;flex-wrap:wrap;gap:.6rem}
+.swatch{width:42px;height:42px;border-radius:50%;cursor:pointer;border:3px solid transparent;position:relative;transition:transform .15s;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.swatch:hover{transform:scale(1.1)}
+.swatch.sel{border-color:var(--dark);transform:scale(1.12)}
+.swatch.sel::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;font-weight:900;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.swatch-light.sel::after{color:#1a0a2e;text-shadow:none}
+
+/* ===== Radio cards ===== */
+.radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:520px){.radio-grid{grid-template-columns:1fr}}
+.radio-card{border:1.5px solid var(--line);border-radius:14px;padding:.9rem 1rem;cursor:pointer;transition:all .18s;background:#fdfaff}
+.radio-card:hover{border-color:var(--pu3)}
+.radio-card.sel{border-color:var(--pk);background:linear-gradient(135deg,rgba(233,30,140,.06),rgba(124,58,237,.06))}
+.radio-card-title{font-size:.86rem;font-weight:700}
+.radio-card-sub{font-size:.74rem;color:var(--gray);margin-top:.15rem}
+
+/* ===== Slider ===== */
+.slider-field{margin-bottom:1.6rem}
+.slider-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--gray);font-weight:600;margin-top:.4rem}
+input[type=range]{width:100%;height:6px;border-radius:99px;background:rgba(124,58,237,.14);outline:none;-webkit-appearance:none;margin-top:.6rem}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--grad);cursor:pointer;box-shadow:0 4px 10px rgba(233,30,140,.35)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--pk);border:none;cursor:pointer}
+
+/* ===== File upload ===== */
+.upload-box{border:2px dashed var(--line);border-radius:14px;padding:1.6rem 1rem;text-align:center;cursor:pointer;transition:all .2s;background:#fdfaff}
+.upload-box:hover{border-color:var(--pk);background:rgba(233,30,140,.04)}
+.upload-box svg{width:28px;height:28px;color:var(--pu);margin-bottom:.5rem}
+.upload-hint{font-size:.78rem;color:var(--gray);margin-top:.2rem}
+.file-list{margin-top:.7rem;display:flex;flex-direction:column;gap:.4rem}
+.file-pill{display:flex;align-items:center;justify-content:space-between;background:#fdfaff;border:1px solid var(--line);border-radius:10px;padding:.45rem .7rem;font-size:.78rem}
+.file-pill button{background:none;border:none;color:var(--pk);cursor:pointer;font-size:.9rem;font-weight:700}
+
+/* ===== Nav buttons ===== */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:2.2rem;gap:1rem}
+.btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:999px;padding:.85rem 1.8rem;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 24px -6px rgba(233,30,140,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -6px rgba(233,30,140,.5)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-ghost{background:none;color:var(--gray);padding:.85rem 1rem}
+.btn-ghost:hover{color:var(--pk)}
+.btn svg{width:16px;height:16px}
+
+/* ===== Review summary ===== */
+.review-block{margin-bottom:1.4rem}
+.review-block h4{font-size:.78rem;font-weight:800;color:var(--pu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.review-block h4::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--pk)}
+.review-field{display:flex;gap:.4rem;padding:.5rem 0;border-bottom:1px solid rgba(124,58,237,.08);font-size:.84rem}
+.review-field .rf-label{flex:0 0 42%;color:var(--gray);font-weight:600}
+.review-field .rf-val{flex:1;font-weight:500}
+.review-field .rf-val.empty{color:#c7bfd6;font-style:italic}
+
+/* ===== Toast / loading ===== */
+.overlay{position:fixed;inset:0;background:rgba(26,10,46,.55);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(4px)}
+.overlay.show{display:flex}
+.overlay-box{background:#fff;border-radius:24px;padding:2.4rem 2.2rem;text-align:center;max-width:340px;box-shadow:0 30px 70px rgba(0,0,0,.25)}
+.spinner{width:46px;height:46px;border-radius:50%;border:4px solid rgba(233,30,140,.15);border-top-color:var(--pk);animation:spin .8s linear infinite;margin:0 auto 1.1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.success-check{width:64px;height:64px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-check svg{width:30px;height:30px;color:#fff}
+.overlay-title{font-size:1.15rem;font-weight:800;margin-bottom:.4rem}
+.overlay-sub{font-size:.85rem;color:var(--gray);line-height:1.5}
+.overlay-box .btn{margin-top:1.4rem}
+
+/* ===== Animation ===== */
+.card{animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.required-star{color:var(--pk)}
+.err-msg{color:var(--pk);font-size:.72rem;font-weight:600;margin-top:.3rem;display:none}
+.field.invalid input,.field.invalid textarea{border-color:var(--pk)!important}
+.field.invalid .err-msg{display:block}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<div class="shell">
+
+  <div class="brand">
+    <div class="brand-mark">FALCONS<span>design</span></div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="steps-row" id="stepsRow"></div>
+  </div>
+
+  <form id="briefForm">
+    <div class="card" id="cardArea"></div>
+  </form>
+
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-box" id="overlayBox">
+    <div class="spinner"></div>
+    <div class="overlay-title">Enviando seu briefing...</div>
+    <div class="overlay-sub">Só um instante, estamos preparando tudo para a Andreza.</div>
+  </div>
+</div>
+
+<script>
+// ====================================================================
+// BRIEFING DE IDENTIDADE VISUAL — FALCONS DESIGN
+// ====================================================================
+
+var STEPS = [
+  'Sobre você',
+  'Público',
+  'Estilo',
+  'Referências',
+  'Entrega'
+];
+
+var state = {
+  step: 1,
+  totalSteps: 5,
+  data: {},
+  cores_sel: [],
+  feelings_sel: [],
+  aplicacoes_sel: [],
+  arquivos: []
+};
+
+var COLORS = [
+  {name:'Rosa vibrante', hex:'#e91e8c'},
+  {name:'Roxo', hex:'#7c3aed'},
+  {name:'Lilás claro', hex:'#d8b4fe'},
+  {name:'Vinho', hex:'#7b170f'},
+  {name:'Laranja', hex:'#f38f1a'},
+  {name:'Dourado', hex:'#c9a227'},
+  {name:'Verde esmeralda', hex:'#0f7b53'},
+  {name:'Verde sálvia', hex:'#9caf88'},
+  {name:'Azul marinho', hex:'#0b1f3a'},
+  {name:'Azul céu', hex:'#5ab4e8'},
+  {name:'Terracota', hex:'#c1602a'},
+  {name:'Preto', hex:'#0a0a0a'},
+  {name:'Branco', hex:'#ffffff', light:true},
+  {name:'Bege', hex:'#e8dcc8', light:true},
+  {name:'Cinza grafite', hex:'#3a3a3a'},
+  {name:'Coral', hex:'#ff6b6b'},
+  {name:'Amarelo', hex:'#f4c430', light:true},
+  {name:'Marsala', hex:'#964b4b'},
+  {name:'Turquesa', hex:'#1abc9c'},
+  {name:'Nude', hex:'#d9b8a3', light:true}
+];
+
+var FEELINGS = [
+  'Sofisticado','Divertido','Minimalista','Ousado','Acolhedor','Moderno',
+  'Clássico','Romântico','Luxuoso','Jovem','Sério','Criativo',
+  'Tecnológico','Artesanal','Delicado','Vibrante','Elegante','Autêntico'
+];
+
+var APLICACOES = [
+  'Instagram','Site','Cartão de visita','Fachada/loja física','Embalagens',
+  'Uniformes','Material impresso','Apresentações comerciais'
+];
+
+// ====================================================================
+// RENDER: progress bar
+// ====================================================================
+function renderProgress() {
+  var pct = (state.step / state.totalSteps) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  var row = document.getElementById('stepsRow');
+  row.innerHTML = '';
+  for (var i = 1; i <= state.totalSteps; i++) {
+    var wrap = document.createElement('div');
+    wrap.className = 'step-dot-wrap';
+
+    var circle = document.createElement('div');
+    circle.className = 'step-circle';
+    if (i < state.step) circle.className += ' done';
+    if (i === state.step) circle.className += ' active';
+    circle.textContent = i < state.step ? '\u2713' : String(i);
+
+    var label = document.createElement('div');
+    label.className = 'step-label';
+    if (i === state.step) label.className += ' active';
+    label.textContent = STEPS[i - 1];
+
+    wrap.appendChild(circle);
+    wrap.appendChild(label);
+    row.appendChild(wrap);
+  }
+}
+
+// ====================================================================
+// FIELD BUILDER HELPERS
+// ====================================================================
+function el(tag, className, html) {
+  var node = document.createElement(tag);
+  if (className) node.className = className;
+  if (html !== undefined) node.innerHTML = html;
+  return node;
+}
+
+function fieldText(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null,
+    opts.label + (opts.required ? ' <span class="required-star">*</span>' : ' <span class="opt">(opcional)</span>'));
+  wrap.appendChild(label);
+
+  var input;
+  if (opts.textarea) {
+    input = el('textarea');
+  } else {
+    input = el('input');
+    input.type = opts.type || 'text';
+  }
+  input.id = opts.id;
+  input.name = opts.id;
+  input.placeholder = opts.placeholder || '';
+  if (opts.value) input.value = opts.value;
+  wrap.appendChild(input);
+
+  var err = el('div', 'err-msg', opts.errMsg || 'Esse campo é obrigatório.');
+  wrap.appendChild(err);
+
+  return wrap;
+}
+
+function fieldSelect(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null,
+    opts.label + (opts.required ? ' <span class="required-star">*</span>' : ' <span class="opt">(opcional)</span>'));
+  wrap.appendChild(label);
+
+  var select = el('select');
+  select.id = opts.id;
+  select.name = opts.id;
+
+  var blank = el('option', null, 'Selecione...');
+  blank.value = '';
+  select.appendChild(blank);
+
+  for (var i = 0; i < opts.options.length; i++) {
+    var o = el('option', null, opts.options[i]);
+    o.value = opts.options[i];
+    select.appendChild(o);
+  }
+  wrap.appendChild(select);
+
+  var err = el('div', 'err-msg', 'Esse campo é obrigatório.');
+  wrap.appendChild(err);
+
+  return wrap;
+}
+
+function fieldChips(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null,
+    opts.label + (opts.required ? ' <span class="required-star">*</span>' : ' <span class="opt">(opcional)</span>'));
+  wrap.appendChild(label);
+
+  var grid = el('div', 'chip-grid');
+  for (var i = 0; i < opts.options.length; i++) {
+    var val = opts.options[i];
+    var chip = el('div', 'chip', val);
+    chip.setAttribute('data-val', val);
+    if (opts.selectedArr.indexOf(val) > -1) chip.className += ' sel';
+    chip.onclick = (function (chipEl, value, arr, max) {
+      return function () {
+        var idx = arr.indexOf(value);
+        if (idx > -1) {
+          arr.splice(idx, 1);
+          chipEl.classList.remove('sel');
+        } else {
+          if (max && arr.length >= max) return;
+          arr.push(value);
+          chipEl.classList.add('sel');
+        }
+      };
+    })(chip, val, opts.selectedArr, opts.max);
+    grid.appendChild(chip);
+  }
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+function fieldRadioCards(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null,
+    opts.label + (opts.required ? ' <span class="required-star">*</span>' : ' <span class="opt">(opcional)</span>'));
+  wrap.appendChild(label);
+
+  var grid = el('div', 'radio-grid');
+  for (var i = 0; i < opts.options.length; i++) {
+    var item = opts.options[i];
+    var card = el('div', 'radio-card');
+    card.innerHTML = '<div class="radio-card-title">' + item.title + '</div>' +
+      (item.sub ? '<div class="radio-card-sub">' + item.sub + '</div>' : '');
+    card.setAttribute('data-val', item.title);
+    if (state.data[opts.id] === item.title) card.className += ' sel';
+    card.onclick = (function (cardEl, value, fieldId, gridEl) {
+      return function () {
+        var siblings = gridEl.querySelectorAll('.radio-card');
+        for (var s = 0; s < siblings.length; s++) siblings[s].classList.remove('sel');
+        cardEl.classList.add('sel');
+        state.data[fieldId] = value;
+      };
+    })(card, item.title, opts.id, grid);
+    grid.appendChild(card);
+  }
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+function fieldSlider(opts) {
+  var wrap = el('div', 'slider-field');
+  var label = el('label', null, opts.label);
+  wrap.appendChild(label);
+
+  var input = el('input');
+  input.type = 'range';
+  input.min = '0';
+  input.max = '100';
+  input.value = state.data[opts.id] || '50';
+  input.id = opts.id;
+  wrap.appendChild(input);
+
+  var labels = el('div', 'slider-labels',
+    '<span>' + opts.leftLabel + '</span><span>' + opts.rightLabel + '</span>');
+  wrap.appendChild(labels);
+
+  input.oninput = function () {
+    state.data[opts.id] = input.value;
+  };
+
+  return wrap;
+}
+
+function fieldSwatches(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null, opts.label + ' <span class="opt">(escolha até 3)</span>');
+  wrap.appendChild(label);
+
+  var grid = el('div', 'swatch-grid');
+  for (var i = 0; i < COLORS.length; i++) {
+    var c = COLORS[i];
+    var sw = el('div', 'swatch' + (c.light ? ' swatch-light' : ''));
+    sw.style.background = c.hex;
+    sw.title = c.name;
+    sw.setAttribute('data-name', c.name);
+    if (state.cores_sel.indexOf(c.name) > -1) sw.className += ' sel';
+    sw.onclick = (function (swEl, name) {
+      return function () {
+        var idx = state.cores_sel.indexOf(name);
+        if (idx > -1) {
+          state.cores_sel.splice(idx, 1);
+          swEl.classList.remove('sel');
+        } else {
+          if (state.cores_sel.length >= 3) return;
+          state.cores_sel.push(name);
+          swEl.classList.add('sel');
+        }
+      };
+    })(sw, c.name);
+    grid.appendChild(sw);
+  }
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+function fieldUpload(opts) {
+  var wrap = el('div', 'field');
+  wrap.id = 'field_' + opts.id;
+  var label = el('label', null, opts.label + ' <span class="opt">(opcional)</span>');
+  wrap.appendChild(label);
+
+  var box = el('div', 'upload-box');
+  box.innerHTML =
+    '<svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 7.5 7.5 12M12 7.5V16.5"/></svg>' +
+    '<div style="font-weight:700;font-size:.85rem">Clique para enviar imagens</div>' +
+    '<div class="upload-hint">Logos, referências visuais, prints (.jpg, .png)</div>';
+
+  var input = el('input');
+  input.type = 'file';
+  input.id = opts.id;
+  input.accept = 'image/*';
+  input.multiple = true;
+  input.style.display = 'none';
+
+  box.onclick = function () { input.click(); };
+
+  var fileList = el('div', 'file-list');
+
+  input.onchange = function () {
+    for (var i = 0; i < input.files.length; i++) {
+      state.arquivos.push(input.files[i].name);
+    }
+    renderFileList(fileList);
+    input.value = '';
+  };
+
+  wrap.appendChild(box);
+  wrap.appendChild(input);
+  wrap.appendChild(fileList);
+  renderFileList(fileList);
+
+  return wrap;
+}
+
+function renderFileList(container) {
+  container.innerHTML = '';
+  for (var i = 0; i < state.arquivos.length; i++) {
+    var name = state.arquivos[i];
+    var pill = el('div', 'file-pill');
+    var span = el('span', null, name.length > 32 ? name.slice(0, 29) + '...' : name);
+    var btn = el('button');
+    btn.type = 'button';
+    btn.innerHTML = '&times;';
+    btn.onclick = (function (idx) {
+      return function () {
+        state.arquivos.splice(idx, 1);
+        renderFileList(container);
+      };
+    })(i);
+    pill.appendChild(span);
+    pill.appendChild(btn);
+    container.appendChild(pill);
+  }
+}
+
+// ====================================================================
+// STEP RENDERERS
+// ====================================================================
+function renderStep1(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Etapa 1 de 5'));
+  card.appendChild(el('div', 'step-title', 'Vamos começar com você'));
+  card.appendChild(el('div', 'step-desc', 'Conte um pouco sobre você e o seu negócio para que eu possa entender o contexto antes de criar.'));
+
+  card.appendChild(fieldText({id:'nome', label:'Seu nome', required:true, placeholder:'Como você se chama?', value:state.data.nome}));
+  var row1 = el('div', 'row2');
+  row1.appendChild(fieldText({id:'email', label:'E-mail', required:true, type:'email', placeholder:'voce@email.com', value:state.data.email}));
+  row1.appendChild(fieldText({id:'whatsapp', label:'WhatsApp', required:true, type:'tel', placeholder:'(00) 00000-0000', value:state.data.whatsapp}));
+  card.appendChild(row1);
+
+  card.appendChild(fieldText({id:'empresa', label:'Nome da empresa/marca', required:true, placeholder:'Como se chama seu negócio?', value:state.data.empresa}));
+  card.appendChild(fieldText({id:'segmento', label:'Segmento de atuação', required:true, placeholder:'Ex: moda, gastronomia, saúde, tecnologia...', value:state.data.segmento}));
+  card.appendChild(fieldText({id:'descricao', label:'Descreva seu negócio em poucas palavras', required:true, textarea:true, placeholder:'O que você vende ou oferece, e para quem?', value:state.data.descricao}));
+
+  var row2 = el('div', 'row2');
+  row2.appendChild(fieldText({id:'cidade', label:'Cidade/Estado', required:false, placeholder:'Onde você atua?', value:state.data.cidade}));
+  row2.appendChild(fieldText({id:'tempo_negocio', label:'Tempo de negócio', required:false, placeholder:'Ex: 2 anos, começando agora...', value:state.data.tempo_negocio}));
+  card.appendChild(row2);
+
+  card.appendChild(fieldText({id:'site', label:'Site ou Instagram', required:false, placeholder:'@seuinstagram ou seusite.com.br', value:state.data.site}));
+}
+
+function renderStep2(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Etapa 2 de 5'));
+  card.appendChild(el('div', 'step-title', 'Quem você quer alcançar'));
+  card.appendChild(el('div', 'step-desc', 'Entender seu público me ajuda a criar uma identidade que realmente conversa com quem importa.'));
+
+  var row1 = el('div', 'row2');
+  row1.appendChild(fieldSelect({id:'faixa_etaria', label:'Faixa etária do público', required:true,
+    options:['18 a 24 anos','25 a 34 anos','35 a 44 anos','45 a 54 anos','55+ anos','Público geral']}));
+  row1.appendChild(fieldSelect({id:'genero', label:'Gênero predominante', required:false,
+    options:['Feminino','Masculino','Ambos / sem predominância']}));
+  card.appendChild(row1);
+
+  card.appendChild(fieldSelect({id:'classe', label:'Classe social predominante', required:false,
+    options:['Classe A','Classe B','Classe C','Classe A/B','Classe B/C','Público diverso']}));
+
+  card.appendChild(fieldText({id:'cliente_ideal', label:'Descreva seu cliente ideal', required:true, textarea:true,
+    placeholder:'Como ele é, o que ele valoriza, por que ele escolheria você?', value:state.data.cliente_ideal}));
+
+  card.appendChild(fieldText({id:'concorrentes', label:'Concorrentes ou marcas de referência', required:false,
+    placeholder:'Quem você admira ou compete no mercado?', value:state.data.concorrentes}));
+
+  card.appendChild(fieldText({id:'diferencial', label:'Qual seu maior diferencial?', required:true, textarea:true,
+    placeholder:'O que te torna diferente da concorrência?', value:state.data.diferencial}));
+
+  card.appendChild(fieldText({id:'missao', label:'Missão ou propósito da marca', required:false, textarea:true,
+    placeholder:'Por que sua marca existe além de vender?', value:state.data.missao}));
+}
+
+function renderStep3(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Etapa 3 de 5'));
+  card.appendChild(el('div', 'step-title', 'A personalidade da sua marca'));
+  card.appendChild(el('div', 'step-desc', 'Aqui começamos a desenhar a alma visual: sensações, cores e tipografia.'));
+
+  card.appendChild(fieldChips({id:'feelings', label:'Quais sensações sua marca deve transmitir?',
+    options:FEELINGS, selectedArr:state.feelings_sel, max:5, required:true}));
+
+  card.appendChild(fieldSwatches({id:'cores'}));
+
+  var row1 = el('div', 'row2');
+  row1.appendChild(fieldText({id:'cores_nao', label:'Alguma cor que você NÃO quer usar?', required:false,
+    placeholder:'Ex: não gosto de verde', value:state.data.cores_nao}));
+  row1.appendChild(fieldText({id:'cor_especifica', label:'Cor específica obrigatória?', required:false,
+    placeholder:'Cor da sua logo atual, se tiver', value:state.data.cor_especifica}));
+  card.appendChild(row1);
+
+  card.appendChild(fieldRadioCards({id:'tipografia', label:'Que estilo de tipografia combina mais com você?',
+    required:false,
+    options:[
+      {title:'Clássica e serifada', sub:'Elegante, tradicional, atemporal'},
+      {title:'Moderna e geométrica', sub:'Limpa, minimalista, direta'},
+      {title:'Manuscrita e orgânica', sub:'Pessoal, artesanal, acolhedora'},
+      {title:'Bold e impactante', sub:'Forte, jovem, expressiva'}
+    ]}));
+
+  var s1 = fieldSlider({id:'escala_simplicidade', leftLabel:'Minimalista', rightLabel:'Detalhado'});
+  var s2 = fieldSlider({id:'escala_classico', leftLabel:'Clássico', rightLabel:'Contemporâneo'});
+  var s3 = fieldSlider({id:'escala_serio', leftLabel:'Sério', rightLabel:'Divertido'});
+  card.appendChild(s1);
+  card.appendChild(s2);
+  card.appendChild(s3);
+
+  card.appendChild(fieldText({id:'persona_famosa', label:'Se sua marca fosse uma pessoa famosa, quem seria?', required:false,
+    placeholder:'Pode ser alguém real ou fictício', value:state.data.persona_famosa}));
+}
+
+function renderStep4(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Etapa 4 de 5'));
+  card.appendChild(el('div', 'step-title', 'Referências visuais'));
+  card.appendChild(el('div', 'step-desc', 'Imagens e exemplos me ajudam a entender exatamente o que está na sua cabeça.'));
+
+  card.appendChild(fieldText({id:'referencias_links', label:'Links de referências (Pinterest, Instagram, sites...)',
+    required:false, textarea:true, placeholder:'Cole aqui links de marcas ou imagens que você gosta', value:state.data.referencias_links}));
+
+  card.appendChild(fieldUpload({id:'upload_referencias', label:'Envie imagens de referência'}));
+
+  card.appendChild(fieldRadioCards({id:'tem_logo', label:'Você já tem uma logo?', required:true,
+    options:[
+      {title:'Sim, e quero manter', sub:'Apenas reforçar a identidade'},
+      {title:'Sim, mas quero refazer', sub:'Repaginação completa'},
+      {title:'Não tenho ainda', sub:'Criação do zero'},
+      {title:'Tenho um rascunho/ideia', sub:'Quero desenvolver'}
+    ]}));
+
+  card.appendChild(fieldText({id:'slogan', label:'Você já tem um slogan ou frase de efeito?', required:false,
+    placeholder:'Se tiver, compartilhe aqui', value:state.data.slogan}));
+
+  card.appendChild(fieldText({id:'o_que_admira', label:'O que você admira em outras identidades visuais?', required:false, textarea:true,
+    placeholder:'Pode citar marcas, cores, tipografias, sensações...', value:state.data.o_que_admira}));
+
+  card.appendChild(fieldText({id:'logo_obs', label:'Observações adicionais sobre a logo', required:false, textarea:true,
+    placeholder:'Algum elemento, símbolo ou ideia que queira incluir?', value:state.data.logo_obs}));
+}
+
+function renderStep5(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Etapa 5 de 5'));
+  card.appendChild(el('div', 'step-title', 'Últimos detalhes'));
+  card.appendChild(el('div', 'step-desc', 'Quase lá! Só preciso entender prazos e onde a identidade será aplicada.'));
+
+  card.appendChild(fieldRadioCards({id:'pacote', label:'Qual pacote te interessa?', required:false,
+    options:[
+      {title:'Bronze', sub:'Identidade essencial'},
+      {title:'Prata', sub:'Identidade + redes sociais'},
+      {title:'Ouro', sub:'Identidade completa + manual de marca'},
+      {title:'Ainda não sei', sub:'Quero uma recomendação'}
+    ]}));
+
+  card.appendChild(fieldSelect({id:'prazo_inicio', label:'Quando você gostaria de começar?', required:false,
+    options:['O quanto antes','Em até 2 semanas','No próximo mês','Ainda estou pesquisando']}));
+
+  card.appendChild(fieldChips({id:'aplicacoes', label:'Onde a identidade será aplicada?',
+    options:APLICACOES, selectedArr:state.aplicacoes_sel, required:false}));
+
+  card.appendChild(fieldSelect({id:'como_conheceu', label:'Como você conheceu a Falcons Design?', required:false,
+    options:['Instagram','Indicação de alguém','Google','WhatsApp/contato direto','Outro']}));
+
+  card.appendChild(fieldText({id:'obs_finais', label:'Algo mais que você gostaria de me contar?', required:false, textarea:true,
+    placeholder:'Qualquer detalhe extra é bem-vindo', value:state.data.obs_finais}));
+}
+
+function renderStep6Review(card) {
+  card.appendChild(el('div', 'step-eyebrow', 'Revisão final'));
+  card.appendChild(el('div', 'step-title', 'Confira antes de enviar'));
+  card.appendChild(el('div', 'step-desc', 'Dê uma última olhada nas suas respostas. Você pode voltar e editar qualquer etapa.'));
+
+  var blocks = [
+    {title:'Sobre você', fields:[
+      ['Nome', state.data.nome], ['E-mail', state.data.email], ['WhatsApp', state.data.whatsapp],
+      ['Empresa', state.data.empresa], ['Segmento', state.data.segmento], ['Descrição', state.data.descricao],
+      ['Cidade', state.data.cidade], ['Tempo de negócio', state.data.tempo_negocio], ['Site/Instagram', state.data.site]
+    ]},
+    {title:'Público', fields:[
+      ['Faixa etária', state.data.faixa_etaria], ['Gênero', state.data.genero], ['Classe social', state.data.classe],
+      ['Cliente ideal', state.data.cliente_ideal], ['Concorrentes', state.data.concorrentes],
+      ['Diferencial', state.data.diferencial], ['Missão', state.data.missao]
+    ]},
+    {title:'Estilo', fields:[
+      ['Sensações', state.feelings_sel.join(', ')], ['Cores escolhidas', state.cores_sel.join(', ')],
+      ['Cores a evitar', state.data.cores_nao], ['Cor específica', state.data.cor_especifica],
+      ['Tipografia', state.data.tipografia], ['Pessoa famosa', state.data.persona_famosa]
+    ]},
+    {title:'Referências', fields:[
+      ['Links', state.data.referencias_links], ['Imagens enviadas', state.arquivos.join(', ')],
+      ['Já tem logo?', state.data.tem_logo], ['Slogan', state.data.slogan],
+      ['Admira', state.data.o_que_admira], ['Obs. da logo', state.data.logo_obs]
+    ]},
+    {title:'Entrega', fields:[
+      ['Pacote', state.data.pacote], ['Prazo', state.data.prazo_inicio],
+      ['Aplicações', state.aplicacoes_sel.join(', ')], ['Como conheceu', state.data.como_conheceu],
+      ['Observações finais', state.data.obs_finais]
+    ]}
+  ];
+
+  for (var b = 0; b < blocks.length; b++) {
+    var block = blocks[b];
+    var div = el('div', 'review-block');
+    div.appendChild(el('h4', null, block.title));
+    for (var f = 0; f < block.fields.length; f++) {
+      var label = block.fields[f][0];
+      var val = block.fields[f][1];
+      var row = el('div', 'review-field');
+      row.appendChild(el('div', 'rf-label', label));
+      var valEl = el('div', 'rf-val' + (val ? '' : ' empty'), val ? escapeHtml(val) : 'Não informado');
+      row.appendChild(valEl);
+      div.appendChild(row);
+    }
+    card.appendChild(div);
+  }
+}
+
+function escapeHtml(str) {
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+// ====================================================================
+// MAIN RENDER + NAV
+// ====================================================================
+function syncFieldsToState() {
+  var ids = ['nome','email','whatsapp','empresa','segmento','descricao','cidade','tempo_negocio','site',
+    'faixa_etaria','genero','classe','cliente_ideal','concorrentes','diferencial','missao',
+    'cores_nao','cor_especifica','persona_famosa',
+    'referencias_links','slogan','o_que_admira','logo_obs',
+    'prazo_inicio','como_conheceu','obs_finais'];
+  for (var i = 0; i < ids.length; i++) {
+    var node = document.getElementById(ids[i]);
+    if (node) state.data[ids[i]] = node.value;
+  }
+}
+
+function validateStep(stepNum) {
+  syncFieldsToState();
+  var requiredByStep = {
+    1: ['nome','email','whatsapp','empresa','segmento','descricao'],
+    2: ['faixa_etaria','cliente_ideal','diferencial'],
+    3: [],
+    4: ['tem_logo'],
+    5: []
+  };
+  var req = requiredByStep[stepNum] || [];
+  var ok = true;
+  for (var i = 0; i < req.length; i++) {
+    var id = req[i];
+    var val = state.data[id];
+    var fieldWrap = document.getElementById('field_' + id);
+    if (!val || val.trim() === '') {
+      ok = false;
+      if (fieldWrap) fieldWrap.classList.add('invalid');
+    } else {
+      if (fieldWrap) fieldWrap.classList.remove('invalid');
+    }
+  }
+  if (stepNum === 3 && state.feelings_sel.length === 0) {
+    ok = false;
+    var fw = document.getElementById('field_feelings');
+    if (fw) fw.classList.add('invalid');
+  }
+  return ok;
+}
+
+function buildNavRow(card, stepNum) {
+  var nav = el('div', 'nav-row');
+
+  if (stepNum > 1) {
+    var back = el('button', 'btn btn-ghost', '\u2190 Voltar');
+    back.type = 'button';
+    back.onclick = function () { goToStep(stepNum - 1); };
+    nav.appendChild(back);
+  } else {
+    nav.appendChild(el('div'));
+  }
+
+  if (stepNum <= state.totalSteps) {
+    var next = el('button', 'btn btn-primary',
+      stepNum === state.totalSteps ? 'Revisar respostas \u2192' : 'Continuar \u2192');
+    next.type = 'button';
+    next.onclick = function () {
+      if (validateStep(stepNum)) {
+        goToStep(stepNum + 1);
+      }
+    };
+    nav.appendChild(next);
+  } else {
+    var sendBtn = el('button', 'btn btn-primary', 'Enviar briefing \u2713');
+    sendBtn.type = 'button';
+    sendBtn.onclick = submitBriefing;
+    nav.appendChild(sendBtn);
+  }
+
+  card.appendChild(nav);
+}
+
+function goToStep(n) {
+  state.step = n;
+  renderCard();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderCard() {
+  var card = document.getElementById('cardArea');
+  card.innerHTML = '';
+  card.classList.remove('card');
+  void card.offsetWidth;
+  card.classList.add('card');
+
+  var n = state.step;
+  if (n === 1) renderStep1(card);
+  else if (n === 2) renderStep2(card);
+  else if (n === 3) renderStep3(card);
+  else if (n === 4) renderStep4(card);
+  else if (n === 5) renderStep5(card);
+  else renderStep6Review(card);
+
+  buildNavRow(card, n);
+  renderProgress();
+}
+
+// ====================================================================
+// SUBMIT
+// ====================================================================
+var EJ_SERVICE = 'service_i4er5xo';
+var EJ_TEMPLATE = 'template_t9q86o3';
+var EJ_KEY = 'VnHE1YmpJeCpcGOz9';
+var EJ_DEST = 'andreza_falcao@hotmail.com';
+
+function buildSummaryText() {
+  var d = state.data;
+  var lines = [];
+  lines.push('=== BRIEFING DE IDENTIDADE VISUAL ===');
+  lines.push('');
+  lines.push('--- SOBRE O CLIENTE ---');
+  lines.push('Nome: ' + (d.nome || '-'));
+  lines.push('E-mail: ' + (d.email || '-'));
+  lines.push('WhatsApp: ' + (d.whatsapp || '-'));
+  lines.push('Empresa: ' + (d.empresa || '-'));
+  lines.push('Segmento: ' + (d.segmento || '-'));
+  lines.push('Descrição: ' + (d.descricao || '-'));
+  lines.push('Cidade: ' + (d.cidade || '-'));
+  lines.push('Tempo de negócio: ' + (d.tempo_negocio || '-'));
+  lines.push('Site/Instagram: ' + (d.site || '-'));
+  lines.push('');
+  lines.push('--- PÚBLICO E POSICIONAMENTO ---');
+  lines.push('Faixa etária: ' + (d.faixa_etaria || '-'));
+  lines.push('Gênero: ' + (d.genero || '-'));
+  lines.push('Classe social: ' + (d.classe || '-'));
+  lines.push('Cliente ideal: ' + (d.cliente_ideal || '-'));
+  lines.push('Concorrentes: ' + (d.concorrentes || '-'));
+  lines.push('Diferencial: ' + (d.diferencial || '-'));
+  lines.push('Missão: ' + (d.missao || '-'));
+  lines.push('');
+  lines.push('--- PERSONALIDADE VISUAL ---');
+  lines.push('Sensações: ' + (state.feelings_sel.join(', ') || '-'));
+  lines.push('Cores escolhidas: ' + (state.cores_sel.join(', ') || '-'));
+  lines.push('Cores a evitar: ' + (d.cores_nao || '-'));
+  lines.push('Cor específica: ' + (d.cor_especifica || '-'));
+  lines.push('Tipografia: ' + (d.tipografia || '-'));
+  lines.push('Escala simplicidade (0-100): ' + (d.escala_simplicidade || '50'));
+  lines.push('Escala clássico/contemporâneo (0-100): ' + (d.escala_classico || '50'));
+  lines.push('Escala sério/divertido (0-100): ' + (d.escala_serio || '50'));
+  lines.push('Pessoa famosa: ' + (d.persona_famosa || '-'));
+  lines.push('');
+  lines.push('--- REFERÊNCIAS ---');
+  lines.push('Links: ' + (d.referencias_links || '-'));
+  lines.push('Imagens enviadas: ' + (state.arquivos.join(', ') || '-'));
+  lines.push('Já tem logo: ' + (d.tem_logo || '-'));
+  lines.push('Slogan: ' + (d.slogan || '-'));
+  lines.push('Admira: ' + (d.o_que_admira || '-'));
+  lines.push('Obs. logo: ' + (d.logo_obs || '-'));
+  lines.push('');
+  lines.push('--- ENTREGA E REVISÃO ---');
+  lines.push('Pacote: ' + (d.pacote || '-'));
+  lines.push('Prazo: ' + (d.prazo_inicio || '-'));
+  lines.push('Aplicações: ' + (state.aplicacoes_sel.join(', ') || '-'));
+  lines.push('Como conheceu: ' + (d.como_conheceu || '-'));
+  lines.push('Observações finais: ' + (d.obs_finais || '-'));
+  return lines.join('\n');
+}
+
+function showOverlaySending() {
+  var box = document.getElementById('overlayBox');
+  box.innerHTML =
+    '<div class="spinner"></div>' +
+    '<div class="overlay-title">Enviando seu briefing...</div>' +
+    '<div class="overlay-sub">Só um instante, estamos preparando tudo para a Andreza.</div>';
+  document.getElementById('overlay').classList.add('show');
+}
+
+function showOverlaySuccess() {
+  var box = document.getElementById('overlayBox');
+  box.innerHTML =
+    '<div class="success-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>' +
+    '<div class="overlay-title">Briefing enviado!</div>' +
+    '<div class="overlay-sub">Recebemos suas respostas. A Andreza vai analisar tudo com calma e entrar em contato em breve.</div>';
+}
+
+function showOverlayFallback() {
+  var box = document.getElementById('overlayBox');
+  var mailBody = encodeURIComponent(buildSummaryText());
+  var mailSubject = encodeURIComponent('Briefing de Identidade Visual - ' + (state.data.empresa || state.data.nome || ''));
+  var mailHref = 'mailto:' + EJ_DEST + '?subject=' + mailSubject + '&body=' + mailBody;
+  box.innerHTML =
+    '<div class="success-check" style="background:linear-gradient(135deg,#a855f7,#7c3aed)"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></div>' +
+    '<div class="overlay-title">Quase lá!</div>' +
+    '<div class="overlay-sub">Não foi possível enviar automaticamente, mas preparamos um e-mail prontinho. Clique no botão abaixo para abrir seu app de e-mail e enviar.</div>' +
+    '<a href="' + mailHref + '" class="btn btn-primary" style="text-decoration:none;justify-content:center;width:100%">Abrir e-mail \u2709</a>';
+}
+
+function submitBriefing() {
+  syncFieldsToState();
+  showOverlaySending();
+
+  var summary = buildSummaryText();
+  var templateParams = {
+    from_name: state.data.nome || '',
+    from_email: state.data.email || '',
+    whatsapp: state.data.whatsapp || '',
+    empresa: state.data.empresa || '',
+    segmento: state.data.segmento || '',
+    to_email: EJ_DEST,
+    message: summary
+  };
+
+  if (typeof emailjs === 'undefined' || !emailjs.send) {
+    setTimeout(showOverlayFallback, 600);
+    return;
+  }
+
+  try {
+    emailjs.init(EJ_KEY);
+    emailjs.send(EJ_SERVICE, EJ_TEMPLATE, templateParams).then(
+      function () { showOverlaySuccess(); },
+      function () { showOverlayFallback(); }
+    );
+  } catch (e) {
+    showOverlayFallback();
+  }
+}
+
+// ====================================================================
+// INIT
+// ====================================================================
+document.addEventListener('DOMContentLoaded', function () {
+  renderCard();
+});
+
+</script>
+</body>
+</html>
