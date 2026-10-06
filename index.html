@@ -180,6 +180,8 @@
   .hero-fi { transform: scale(.8); }
   .hero-main-title { font-size: clamp(2.4rem, 13vw, 3.8rem); }
 }
+a.pkg-cta{text-decoration:none}
+#pacotes .pkg-feats .pkg-feat-v{min-width:1.6rem;text-align:center}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1618,29 +1620,101 @@ body, h1, h2, h3, h4, h5, h6, p, span, div, a, button, li {
 <div class="container">
   <div class="pacotes-hdr">
     <div class="reveal d1"><span class="pink-pill" style="margin-bottom:.7rem"><span id="i-arr7"></span>SOCIAL MEDIA</span></div>
-    <h2 class="pacotes-h2 reveal d2">Serviço <span class="grad-text">Completo</span></h2>
-    <p class="pacotes-sub reveal d3">Planejamento, gestão, publicação, arte e copy — tudo em um só lugar</p>
+    <h2 class="pacotes-h2 reveal d2">Escolha seu <span class="grad-text">pacote</span></h2>
+    <p class="pacotes-sub reveal d3">Planejamento, arte, copy e publicação em todos os planos. Muda a frequência de posts e a quantidade de vídeos.</p>
   </div>
-  <div class="pacotes-grid" style="grid-template-columns:minmax(280px,420px);justify-content:center">
-    <div class="pkg pkg-premium reveal rs d3">
-      <div class="pkg-popular">⭐ GESTÃO COMPLETA</div>
-      <div class="pkg-ico"><span id="i-pkg2"></span></div>
-      <div class="pkg-name">SOCIAL MEDIA FULL</div>
-      <div class="pkg-price"><span class="pkg-curr">R$</span><span class="pkg-num">2.500</span><span class="pkg-dec">,00/mês</span></div>
+  <div class="pacotes-grid">
+
+    <div class="pkg pkg-basic reveal d2" data-pkg="basico">
+      <div class="pkg-ico"><span id="i-pkg1"></span></div>
+      <div class="pkg-name">Básico</div>
+      <div class="pkg-price"><span class="pkg-curr">R$</span><span class="pkg-num">800</span><span class="pkg-dec">,00/mês</span></div>
       <div class="pkg-pix">plano mensal</div>
       <div class="pkg-feats">
-        <div class="pkg-feat"><span>Planejamento estratégico</span><span class="pkg-feat-v">✓</span></div>
-        <div class="pkg-feat"><span>Gestão de redes sociais</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Posts por semana</span><span class="pkg-feat-v">3</span></div>
+        <div class="pkg-feat"><span>Vídeos por mês</span><span class="pkg-feat-v">Não</span></div>
+        <div class="pkg-feat"><span>Planejamento de conteúdo</span><span class="pkg-feat-v">✓</span></div>
         <div class="pkg-feat"><span>Direção de arte</span><span class="pkg-feat-v">✓</span></div>
         <div class="pkg-feat"><span>Copywriting</span><span class="pkg-feat-v">✓</span></div>
-        <div class="pkg-feat"><span>Design UX/UI</span><span class="pkg-feat-v">✓</span></div>
-        <div class="pkg-feat"><span>Publicação & calendário</span><span class="pkg-feat-v">✓</span></div>
-        <div class="pkg-feat"><span>Alterações</span><span class="pkg-feat-v">Sem limite</span></div>
+        <div class="pkg-feat"><span>Publicação e calendário</span><span class="pkg-feat-v">✓</span></div>
       </div>
-      <button class="pkg-cta" onclick="window.open('https://wa.me/5584981161794?text=Quero+contratar+o+Servi%C3%A7o+Completo+(R%24+2.500)!','_blank')"><span id="i-pcs2"></span>SOLICITAR</button>
+      <a class="pkg-cta" href="#" target="_blank" rel="noopener"><span id="i-pcs1"></span>QUERO ESSE</a>
     </div>
+
+    <div class="pkg pkg-premium reveal rs d3" data-pkg="intermediario">
+      <div class="pkg-popular">⭐ RECOMENDADO</div>
+      <div class="pkg-ico"><span id="i-pkg2"></span></div>
+      <div class="pkg-name">Intermediário</div>
+      <div class="pkg-price"><span class="pkg-curr">R$</span><span class="pkg-num">1.200</span><span class="pkg-dec">,00/mês</span></div>
+      <div class="pkg-pix">plano mensal</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat"><span>Posts por semana</span><span class="pkg-feat-v">4</span></div>
+        <div class="pkg-feat"><span>Vídeos por mês</span><span class="pkg-feat-v">1</span></div>
+        <div class="pkg-feat"><span>Planejamento de conteúdo</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Direção de arte</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Copywriting</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Publicação e calendário</span><span class="pkg-feat-v">✓</span></div>
+      </div>
+      <a class="pkg-cta" href="#" target="_blank" rel="noopener"><span id="i-pcs2"></span>QUERO ESSE</a>
+    </div>
+
+    <div class="pkg pkg-business reveal d4" data-pkg="premium">
+      <div class="pkg-ico"><span id="i-pkg3"></span></div>
+      <div class="pkg-name">Premium</div>
+      <div class="pkg-price"><span class="pkg-curr">R$</span><span class="pkg-num">1.600</span><span class="pkg-dec">,00/mês</span></div>
+      <div class="pkg-pix">plano mensal</div>
+      <div class="pkg-feats">
+        <div class="pkg-feat"><span>Posts por semana</span><span class="pkg-feat-v">5</span></div>
+        <div class="pkg-feat"><span>Vídeos por mês</span><span class="pkg-feat-v">4</span></div>
+        <div class="pkg-feat"><span>Planejamento de conteúdo</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Direção de arte</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Copywriting</span><span class="pkg-feat-v">✓</span></div>
+        <div class="pkg-feat"><span>Publicação e calendário</span><span class="pkg-feat-v">✓</span></div>
+      </div>
+      <a class="pkg-cta" href="#" target="_blank" rel="noopener"><span id="i-pcs3"></span>QUERO ESSE</a>
+    </div>
+
   </div>
 </div>
+<script>
+(function(){
+  var WA = '5584981161794';
+  var PKGS = {
+    basico: { nome: 'Básico', preco: 'R$ 800,00/mês', itens: [
+      '3 posts por semana',
+      'Planejamento de conteúdo',
+      'Direção de arte',
+      'Copywriting',
+      'Publicação e calendário'
+    ]},
+    intermediario: { nome: 'Intermediário', preco: 'R$ 1.200,00/mês', itens: [
+      '4 posts por semana',
+      '1 vídeo por mês',
+      'Planejamento de conteúdo',
+      'Direção de arte',
+      'Copywriting',
+      'Publicação e calendário'
+    ]},
+    premium: { nome: 'Premium', preco: 'R$ 1.600,00/mês', itens: [
+      '5 posts por semana',
+      '4 vídeos por mês',
+      'Planejamento de conteúdo',
+      'Direção de arte',
+      'Copywriting',
+      'Publicação e calendário'
+    ]}
+  };
+  document.querySelectorAll('#pacotes .pkg[data-pkg]').forEach(function(card){
+    var p = PKGS[card.getAttribute('data-pkg')];
+    if(!p) return;
+    var msg = 'Oi, Andreza! Vi a proposta e escolhi o pacote ' + p.nome + ' (' + p.preco + ').\n\n' +
+      'O que está incluso:\n' + p.itens.map(function(i){ return '• ' + i; }).join('\n') +
+      '\n\nPodemos conversar sobre os próximos passos?';
+    var a = card.querySelector('.pkg-cta');
+    a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+  });
+})();
+</script>
 </section>
 <section id="pagamento">
 <div class="pag-bg bg-soft"></div>
